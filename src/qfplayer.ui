@@ -1,25 +1,39 @@
-<UI version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <class>qfplayerClass</class>
- <widget class="QWidget" name="qfplayerClass" >
-  <property name="objectName" >
-   <string notr="true">qfplayerClass</string>
-  </property>
-  <property name="geometry" >
+ <widget class="QWidget" name="qfplayerClass">
+  <property name="geometry">
    <rect>
-	<x>0</x>
-	<y>0</y>
-	<width>600</width>
-	<height>400</height>
+    <x>0</x>
+    <y>0</y>
+    <width>965</width>
+    <height>621</height>
    </rect>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string>qfplayer</string>
   </property>
+  <widget class="QFVideoWidget" name="video">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>20</y>
+     <width>921</width>
+     <height>561</height>
+    </rect>
+   </property>
+  </widget>
  </widget>
- <layoutDefault spacing="6" margin="11" />
- <pixmapfunction></pixmapfunction>
+ <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>QFVideoWidget</class>
+   <extends>QOpenGLWidget</extends>
+   <header>video/QFVideoWidget.h</header>
+  </customwidget>
+ </customwidgets>
  <resources>
-   <include location="qfplayer.qrc"/>
+  <include location="qfplayer.qrc"/>
  </resources>
  <connections/>
-</UI>
+</ui>

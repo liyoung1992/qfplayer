@@ -5,7 +5,7 @@
 <Qt_LIBS_>D:\Qt\Qt5.12.0\5.12.0\msvc2017_64\lib\Qt5OpenGL.lib;D:\Qt\Qt5.12.0\5.12.0\msvc2017_64\lib\Qt5Svg.lib;D:\Qt\Qt5.12.0\5.12.0\msvc2017_64\lib\Qt5Widgets.lib;D:\Qt\Qt5.12.0\5.12.0\msvc2017_64\lib\Qt5OpenGLExtensions.lib;D:\Qt\Qt5.12.0\5.12.0\msvc2017_64\lib\Qt5Gui.lib;D:\Qt\Qt5.12.0\5.12.0\msvc2017_64\lib\Qt5NetworkAuth.lib;D:\Qt\Qt5.12.0\5.12.0\msvc2017_64\lib\Qt5Network.lib;D:\Qt\Qt5.12.0\5.12.0\msvc2017_64\lib\Qt5Core.lib;D:\Qt\Qt5.12.0\5.12.0\msvc2017_64\lib\qtmain.lib;shell32.lib</Qt_LIBS_>
 <Qt_LIBPATH_>D:\Qt\Qt5.12.0\5.12.0\msvc2017_64\lib;C:\openssl\lib;C:\Utils\my_sql\mysql-5.6.11-winx64\lib;C:\Utils\postgresql\pgsql\lib</Qt_LIBPATH_>
 <Qt_INCLUDEPATH_
-      >$(Qt_INCLUDEPATH_);x64\Release\moc;x64\Release\uic</Qt_INCLUDEPATH_>
+      >$(Qt_INCLUDEPATH_);x64\Release\moc;x64\Release\moc\video;x64\Release\uic</Qt_INCLUDEPATH_>
     <QtBkup_QtInstall
       >msvc2017_64</QtBkup_QtInstall>
     <QtBkup_QtModules

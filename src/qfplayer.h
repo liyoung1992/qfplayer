@@ -12,7 +12,7 @@ class qfplayer : public QWidget
 public:
 	qfplayer(QWidget *parent = Q_NULLPTR);
 
-private:
+//private:
 	Ui::qfplayerClass ui;
 };
 #endif // QFPLAYER_H

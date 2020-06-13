@@ -46,7 +46,7 @@
   </ImportGroup>
   <PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <QtInstall>msvc2017_64</QtInstall>
-    <QtModules>core;gui;networkauth;opengl;openglextensions;svg;widgets</QtModules>
+    <QtModules>core;gui;multimedia;multimediawidgets;networkauth;opengl;openglextensions;svg;widgets</QtModules>
   </PropertyGroup>
   <PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <QtInstall>msvc2017_64</QtInstall>
@@ -62,7 +62,7 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
-      <AdditionalIncludeDirectories>..\include\ffmpeg;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\include\ffmpeg;.\audio;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -78,6 +78,7 @@
       <DebugInformationFormat />
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <AdditionalIncludeDirectories>.\audio;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -86,10 +87,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="audio\QfAudioPlay.cpp" />
+    <ClCompile Include="audio\QfResample.cpp" />
+    <ClCompile Include="decode\QfDecode.cpp" />
     <ClCompile Include="demux\QfDemux.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="qfplayer.cpp" />
-    <ClCompile Include="video\decode\QfDecode.cpp" />
+    <ClCompile Include="video\QFVideoWidget.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="qfplayer.h" />
@@ -101,10 +105,13 @@
     <QtRcc Include="qfplayer.qrc" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="audio\QfAudioPlay.h" />
+    <ClInclude Include="audio\QfResample.h" />
+    <ClInclude Include="decode\QfDecode.h" />
     <ClInclude Include="demux\QfDemux.h" />
     <ClInclude Include="utils\function.h" />
     <ClInclude Include="utils\pch.h" />
-    <ClInclude Include="video\decode\QfDecode.h" />
+    <QtMoc Include="video\QFVideoWidget.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

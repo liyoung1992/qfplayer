@@ -12,18 +12,23 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QWidget>
+#include "video/QFVideoWidget.h"
 
 QT_BEGIN_NAMESPACE
 
 class Ui_qfplayerClass
 {
 public:
+    QFVideoWidget *video;
 
     void setupUi(QWidget *qfplayerClass)
     {
         if (qfplayerClass->objectName().isEmpty())
             qfplayerClass->setObjectName(QString::fromUtf8("qfplayerClass"));
-        qfplayerClass->resize(600, 400);
+        qfplayerClass->resize(965, 621);
+        video = new QFVideoWidget(qfplayerClass);
+        video->setObjectName(QString::fromUtf8("video"));
+        video->setGeometry(QRect(10, 20, 921, 561));
 
         retranslateUi(qfplayerClass);
 
