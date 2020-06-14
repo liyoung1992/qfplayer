@@ -59,7 +59,8 @@ void QFVideoWidget::repaint(AVFrame *frame)
 	if (!frame)return;
 	mux.lock();
 	//容错，保证尺寸正确
-	if (!datas[0] || width * height == 0 || frame->width != this->width || frame->height != this->height)
+	if (!datas[0] || width * height == 0 ||
+		frame->width != this->width || frame->height != this->height)
 	{
 		av_frame_free(&frame);
 		mux.unlock();
@@ -70,11 +71,11 @@ void QFVideoWidget::repaint(AVFrame *frame)
 	memcpy(datas[2], frame->data[2], width*height / 4);
 	//行对齐问题
 	mux.unlock();
-
+	av_frame_free(&frame);
 	//刷新显示
 	update();
 }
-void QFVideoWidget::init(int width, int height)
+void QFVideoWidget::init(const int& width, const int& height)
 {
 	mux.lock();
 	this->width = width;

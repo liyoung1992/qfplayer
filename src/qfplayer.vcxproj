@@ -88,11 +88,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="audio\QfAudioPlay.cpp" />
+    <ClCompile Include="audio\QfAudioThread.cpp" />
     <ClCompile Include="audio\QfResample.cpp" />
     <ClCompile Include="decode\QfDecode.cpp" />
     <ClCompile Include="demux\QfDemux.cpp" />
+    <ClCompile Include="demux\QfDemuxThread.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="qfplayer.cpp" />
+    <ClCompile Include="video\QfVideoThread.cpp" />
     <ClCompile Include="video\QFVideoWidget.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -106,11 +109,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="audio\QfAudioPlay.h" />
+    <ClInclude Include="audio\QfAudioThread.h" />
     <ClInclude Include="audio\QfResample.h" />
     <ClInclude Include="decode\QfDecode.h" />
+    <ClInclude Include="demux\QfDemuxThread.h" />
     <ClInclude Include="demux\QfDemux.h" />
     <ClInclude Include="utils\function.h" />
     <ClInclude Include="utils\pch.h" />
+    <ClInclude Include="video\QfVideoCallback.h" />
+    <ClInclude Include="video\QfVideoThread.h" />
     <QtMoc Include="video\QFVideoWidget.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

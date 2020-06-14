@@ -7,11 +7,13 @@
 #include <QGLShaderProgram>
 #include <mutex>
 #include "../utils/pch.h"
-class QFVideoWidget : public QOpenGLWidget, protected QOpenGLFunctions
+#include "QfVideoCallback.h"
+class QFVideoWidget : public QOpenGLWidget,
+	protected QOpenGLFunctions,public QFVideoCallback
 {
 	Q_OBJECT
 public:
-	void init(int width, int height);
+	virtual void init(const int& width, const int& height);
 
 	//不管成功与否都释放frame空间
 	virtual void repaint(AVFrame *frame);

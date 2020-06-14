@@ -1,5 +1,3 @@
-﻿  QfDemux.cpp
-  main.cpp
-e:\develop\qfplayer\include\ffmpeg\libavutil\rational.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失 (编译源文件 demux\QfDemux.cpp)
-e:\develop\qfplayer\include\ffmpeg\libavutil\rational.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失 (编译源文件 main.cpp)
+﻿  main.cpp
+e:\develop\qfplayer\include\ffmpeg\libavutil\rational.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
   qfplayer.vcxproj -> E:\develop\qfplayer\build\debug\qfplayer.exe

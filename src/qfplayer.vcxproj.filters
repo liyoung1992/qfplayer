@@ -61,6 +61,15 @@
     <ClCompile Include="audio\QfAudioPlay.cpp">
       <Filter>audio</Filter>
     </ClCompile>
+    <ClCompile Include="audio\QfAudioThread.cpp">
+      <Filter>audio</Filter>
+    </ClCompile>
+    <ClCompile Include="video\QfVideoThread.cpp">
+      <Filter>video</Filter>
+    </ClCompile>
+    <ClCompile Include="demux\QfDemuxThread.cpp">
+      <Filter>demux</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="qfplayer.h">
@@ -98,6 +107,18 @@
     </ClInclude>
     <ClInclude Include="audio\QfAudioPlay.h">
       <Filter>audio</Filter>
+    </ClInclude>
+    <ClInclude Include="audio\QfAudioThread.h">
+      <Filter>audio</Filter>
+    </ClInclude>
+    <ClInclude Include="video\QfVideoThread.h">
+      <Filter>video</Filter>
+    </ClInclude>
+    <ClInclude Include="video\QfVideoCallback.h">
+      <Filter>video</Filter>
+    </ClInclude>
+    <ClInclude Include="demux\QfDemuxThread.h">
+      <Filter>demux</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

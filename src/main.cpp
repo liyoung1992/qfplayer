@@ -7,11 +7,16 @@
 #include <QLabel>
 #include "audio/QfResample.h"
 #include "audio/QfAudioPlay.h"
+#include "audio/QfAudioThread.h"
+#include "video/QfVideoThread.h"
+#include "demux/QfDemuxThread.h"
 
 using namespace std;
 class TestThread :public QThread
 {
 public:
+	QfAudioThread at;
+	QfVideoThread vt;
 	void Init()
 	{
 		//香港卫视
@@ -22,22 +27,26 @@ public:
 // 		demux.close();
 		url = "D:/test.mp4";
 		cout << "demux.Open = " << demux.open(url);
-		cout << "CopyVPara = " << demux.copyVideoPara() << endl;
-		cout << "CopyAPara = " << demux.copyAudioPara() << endl;
+// 		cout << "CopyVPara = " << demux.copyVideoPara() << endl;
+// 		cout << "CopyAPara = " << demux.copyAudioPara() << endl;
 		//cout << "seek=" << demux.Seek(0.95) << endl;
 
 		/////////////////////////////
 // 		img_convert_ctx = sws_getContext(pCodecCtx->width, pCodecCtx->height, pCodecCtx->pix_fmt,
-// 			pCodecCtx->width, pCodecCtx->height, AV_PIX_FMT_RGB32, SWS_BICUBIC, NULL, NULL, NULL);
-		cout << "vdecode.Open() = " << vdecode.open(demux.copyVideoPara()) << endl;
-		//vdecode.Clear();
-		//vdecode.Close();
-		cout << "adecode.Open() = " << adecode.open(demux.copyAudioPara()) << endl;
-		cout << "resample.Open = " << resample.open(demux.copyAudioPara()) << endl;
-		QfAudioPlay::instance()->channels = demux.channels();
-		QfAudioPlay::instance()->sampleRate = demux.sample_rate();
-
-		cout << "XAudioPlay::Get()->Open() = " << QfAudioPlay::instance()->open() << endl;
+// // 			pCodecCtx->width, pCodecCtx->height, AV_PIX_FMT_RGB32, SWS_BICUBIC, NULL, NULL, NULL);
+// 		cout << "vdecode.Open() = " << vdecode.open(demux.copyVideoPara()) << endl;
+// 		//vdecode.Clear();
+// 		//vdecode.Close();
+// 		cout << "adecode.Open() = " << adecode.open(demux.copyAudioPara()) << endl;
+// 		cout << "resample.Open = " << resample.open(demux.copyAudioPara()) << endl;
+// 		QfAudioPlay::instance()->channels = demux.channels();
+// 		QfAudioPlay::instance()->sampleRate = demux.sample_rate();
+// 
+// 		cout << "XAudioPlay::Get()->Open() = " << QfAudioPlay::instance()->open() << endl;
+		cout << "at.Open = " << at.open(demux.copyAudioPara(), demux.sample_rate(), demux.channels());
+		vt.open(demux.copyVideoPara(), video, demux.width(), demux.height());
+		at.start();
+		vt.start();
 	}
 	unsigned char *pcm = new unsigned char[1024 * 1024];
 	void run()
@@ -47,43 +56,49 @@ public:
 			AVPacket *pkt = demux.read();
 			if (demux.isAudio(pkt))
 			{
-				adecode.send(pkt);
-				AVFrame *frame = adecode.recv();
-// 				adecode.Send(pkt);
-// 				AVFrame *frame = adecode.Recv();
-				int len = resample.resample(frame, pcm);
-				//cout << "Resample:" << resample.resample(frame, pcm) << " ";
-				cout << "Resample:" << len << " ";
-				while (len > 0)
-				{
-					if (QfAudioPlay::instance()->getFree() >= len)
-					{
-						QfAudioPlay::instance()->write(pcm, len);
-						break;
-					}
-					msleep(1);
-				}
-				//cout << "Audio:" << frame << endl;
+				at.push(pkt);
+// 				adecode.send(pkt);
+// 				AVFrame *frame = adecode.recv();
+// // 				adecode.Send(pkt);
+// // 				AVFrame *frame = adecode.Recv();
+// 				int len = resample.resample(frame, pcm);
+// 				//cout << "Resample:" << resample.resample(frame, pcm) << " ";
+// 				cout << "Resample:" << len << " ";
+// 				while (len > 0)
+// 				{
+// 					if (QfAudioPlay::instance()->getFree() >= len)
+// 					{
+// 						QfAudioPlay::instance()->write(pcm, len);
+// 						break;
+// 					}
+// 					msleep(1);
+// 				}
+// 				//cout << "Audio:" << frame << endl;
 			}
 			else
 			{
-				vdecode.send(pkt);
-				AVFrame *frame = vdecode.recv();
-				video->repaint(frame);
-				msleep(40);
+				vt.push(pkt);
+// 				vdecode.send(pkt);
+// 				AVFrame *frame = vdecode.recv();
+// 				video->repaint(frame);
+// 				msleep(40);
 				//cout << "Video:" << frame << endl;
 			}
-			if (!pkt)break;
+			if (!pkt)
+			{
+				demux.seek(0);
+				//break;
+			}
 		}
 	}
 	///测试XDemux
 	QFDemux demux;
 	///解码测试
-	QFDecode vdecode;
-	QFDecode adecode;
-	QFVideoWidget *video;
-	QfResample resample;
-	QLabel* label;
+// 	QFDecode vdecode;
+// 	QFDecode adecode;
+	QFVideoWidget *video = NULL;
+	//QfResample resample;
+	//QLabel* label;
 };
 
 int main(int argc, char *argv[])
@@ -126,7 +141,7 @@ int main(int argc, char *argv[])
 // 	}
 
 	TestThread tt;
-	tt.Init();
+
 
 
 	QApplication a(argc, argv);
@@ -135,9 +150,8 @@ int main(int argc, char *argv[])
 
 
 	//初始化gl窗口
-	w.ui.video->init(tt.demux.width(), tt.demux.height());
-	tt.video = w.ui.video;
-	tt.start();
-
+	QfDemuxThread dt;
+	dt.open("D:/test.mp4", w.ui.video);
+	dt.start();
 	return a.exec();
 }

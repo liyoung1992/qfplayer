@@ -84,6 +84,8 @@ void *QFVideoWidget::qt_metacast(const char *_clname)
         return static_cast<void*>(this);
     if (!strcmp(_clname, "QOpenGLFunctions"))
         return static_cast< QOpenGLFunctions*>(this);
+    if (!strcmp(_clname, "QFVideoCallback"))
+        return static_cast< QFVideoCallback*>(this);
     return QOpenGLWidget::qt_metacast(_clname);
 }
 

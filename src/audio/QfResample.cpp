@@ -12,7 +12,7 @@ QfResample::~QfResample()
 
 }
 
-bool QfResample::open(AVCodecParameters *para)
+bool QfResample::open(AVCodecParameters *para, bool isClearPara)
 {
 	if (!para)return false;
 	m_pMutex.lock();
@@ -30,7 +30,8 @@ bool QfResample::open(AVCodecParameters *para)
 		para->sample_rate,
 		0, 0
 	);
-	avcodec_parameters_free(&para);
+	if (isClearPara)
+		avcodec_parameters_free(&para);
 	int re = swr_init(m_pSwrContext);
 	m_pMutex.unlock();
 	if (re != 0)
