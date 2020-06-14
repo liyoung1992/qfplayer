@@ -19,7 +19,7 @@ public:
 	virtual ~QfDemuxThread();
 
 private:
-	bool isExit = false;
+	bool is_exit = false;
 	std::mutex mux;
 	QFDemux *demux = 0;
 	QfVideoThread *video_thread = NULL;

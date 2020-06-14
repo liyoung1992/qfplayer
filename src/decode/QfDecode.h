@@ -23,10 +23,13 @@ public:
    //每次复制一份，由调用者释放 av_frame_free
 	virtual AVFrame* recv();
 
+	long long get_pts() const;
+
 private:
 	bool m_pIsAudio;
 	std::mutex m_pMutex;
 	AVCodecContext* m_pCodec;
+	long long pts = 0;
 };
 
 #endif //QFDECODE_H

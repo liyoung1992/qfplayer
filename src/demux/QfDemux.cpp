@@ -18,6 +18,7 @@ QFDemux::~QFDemux()
 
 bool QFDemux::open(const char *url)
 {
+	close();
 	//参数设置
 	AVDictionary *opt = NULL;
 	av_dict_set(&opt, "rtsp_transport", "tcp", 0);
@@ -77,9 +78,9 @@ bool QFDemux::open(const char *url)
 	m_pChannels = as->codecpar->channels;
 
 	//AVSampleFormat;
-	std::cout << "channels = " << as->codecpar->channels << std::endl;
+	//std::cout << "channels = " << as->codecpar->channels << std::endl;
 	//一帧数据？？ 单通道样本数 
-	std::cout << "frame_size = " << as->codecpar->frame_size << std::endl;
+	//std::cout << "frame_size = " << as->codecpar->frame_size << std::endl;
 	//1024 * 2 * 2 = 4096  fps = sample_rate/frame_size
 
 	m_pMutex.unlock();

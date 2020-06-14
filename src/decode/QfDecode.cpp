@@ -17,6 +17,7 @@ bool QFDecode::open(AVCodecParameters *para)
 	if (!para)
 		return false;
 	close();
+	pts = 0;
 	///解码器打开
 	///找到解码器
 	AVCodec *vcodec = avcodec_find_decoder(para->codec_id);
@@ -59,6 +60,7 @@ void QFDecode::close()
 		avcodec_close(m_pCodec);
 		avcodec_free_context(&m_pCodec);
 	}
+	pts = 0;
 	m_pMutex.unlock();
 }
 
@@ -102,6 +104,12 @@ AVFrame* QFDecode::recv()
 		av_frame_free(&frame);
 		return NULL;
 	}
-	std::cout << "[" << frame->linesize[0] << "] " << std::flush;
+	pts = frame->pts;
+	//std::cout << "[" << frame->linesize[0] << "] " << std::flush;
 	return frame;
+}
+
+long long QFDecode::get_pts() const
+{
+	return pts;
 }

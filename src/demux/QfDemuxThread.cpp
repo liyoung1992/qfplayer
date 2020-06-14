@@ -3,7 +3,7 @@ using namespace std;
 
 void QfDemuxThread::run()
 {
-	while (!isExit)
+	while (!is_exit)
 	{
 		mux.lock();
 		if (!demux)
@@ -19,6 +19,10 @@ void QfDemuxThread::run()
 			msleep(5);
 			continue;
 		}
+		//音视频同步
+		if (video_thread && audio_thread) {
+			video_thread->set_synpts(audio_thread->get_pts());
+		}
 		//判断数据是音频
 		if (demux->isAudio(pkt))
 		{
@@ -31,6 +35,7 @@ void QfDemuxThread::run()
 				video_thread->push(pkt);
 		}
 		mux.unlock();
+		msleep(1);
 	}
 }
 
@@ -41,9 +46,12 @@ bool QfDemuxThread::open(const char *url, QFVideoCallback *call)
 		return false;
 
 	mux.lock();
-	if (!demux) demux = new QFDemux();
-	if (!video_thread) video_thread = new QfVideoThread();
-	if (!audio_thread) audio_thread = new QfAudioThread();
+	if (!demux) 
+		demux = new QFDemux();
+	if (!video_thread) 
+		video_thread = new QfVideoThread();
+	if (!audio_thread) 
+		audio_thread = new QfAudioThread();
 
 	//打开解封装
 	bool re = demux->open(url);
@@ -67,13 +75,19 @@ bool QfDemuxThread::open(const char *url, QFVideoCallback *call)
 		cout << "audio_thread->Open failed!" << endl;
 	}
 	mux.unlock();
-	cout << "QfDemuxThread::Open " << re << endl;
+	//cout << "QfDemuxThread::Open " << re << endl;
 	return re;
 }
 //启动所有线程
 void QfDemuxThread::start()
 {
 	mux.lock();
+	if (!demux) 
+		demux = new QFDemux();
+	if (!video_thread) 
+		video_thread = new QfVideoThread();
+	if (!audio_thread) 
+		audio_thread = new QfAudioThread();
 	//启动当前线程
 	QThread::start();
 	if (video_thread)
@@ -85,6 +99,6 @@ void QfDemuxThread::start()
 
 QfDemuxThread::~QfDemuxThread()
 {
-	isExit = true;
+	is_exit = true;
 	wait();
 }

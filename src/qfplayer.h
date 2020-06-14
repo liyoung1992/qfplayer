@@ -12,7 +12,9 @@ class qfplayer : public QWidget
 public:
 	qfplayer(QWidget *parent = Q_NULLPTR);
 
-//private:
+public slots:
+	void on_openFile_clicked();
+private:
 	Ui::qfplayerClass ui;
 };
 #endif // QFPLAYER_H

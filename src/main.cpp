@@ -140,7 +140,7 @@ int main(int argc, char *argv[])
 // 		if (!pkt)break;
 // 	}
 
-	TestThread tt;
+	//TestThread tt;
 
 
 
@@ -150,8 +150,9 @@ int main(int argc, char *argv[])
 
 
 	//³õÊ¼»¯gl´°¿Ú
-	QfDemuxThread dt;
-	dt.open("D:/test.mp4", w.ui.video);
-	dt.start();
+// 	QfDemuxThread dt;
+// 	dt.open("D:/test.mp4", w.ui.video);
+// 	//dt.open("rtsp://192.168.1.110:8554/", w.ui.video);
+// 	dt.start();
 	return a.exec();
 }

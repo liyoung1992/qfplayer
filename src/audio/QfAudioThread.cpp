@@ -1,21 +1,32 @@
 #include "QfAudioThread.h"
 
+QfAudioThread::QfAudioThread()
+{
+	if (!resample) 
+		resample = new QfResample();
+	if (!audio_play) 
+		audio_play = QfAudioPlay::instance();
+}
+
 QfAudioThread::~QfAudioThread()
 {
-
+	is_exit = true;
+	wait();
 }
 
 bool QfAudioThread::open(AVCodecParameters *para, int sampleRate, int channels)
 {
 	if (!para)
 		return false;
-	mutex.lock();
-	if (!decode) 
-		decode = new QFDecode();
-	if (!resample)
-		resample = new QfResample();
-	if (!audio_play) 
-		audio_play = QfAudioPlay::instance();
+	clear();
+	audio_mutex.lock();
+// 	if (!decode) 
+// 		decode = new QFDecode();
+// 	if (!resample)
+// 		resample = new QfResample();
+// 	if (!audio_play) 
+// 		audio_play = QfAudioPlay::instance();
+	pts = 0;
 	bool re = true;
 	if (!resample->open(para, false))
 	{
@@ -34,50 +45,50 @@ bool QfAudioThread::open(AVCodecParameters *para, int sampleRate, int channels)
 		std::cout << "audio QFDecode open failed!" << std::endl;
 		re = false;
 	}
-	mutex.unlock();
+	audio_mutex.unlock();
 	std::cout << "XAudioThread::Open :" << re << std::endl;
 	return re;
 }
 
-void QfAudioThread::push(AVPacket* pkt)
-{
-	if (!pkt)return;
-	//阻塞
-	while (!is_exit)
-	{
-		mutex.lock();
-		if (packs.size() < max_list)
-		{
-			packs.push_back(pkt);
-			mutex.unlock();
-			break;
-		}
-		mutex.unlock();
-		msleep(1);
-	}
-}
+// void QfAudioThread::push(AVPacket* pkt)
+// {
+// 	if (!pkt)return;
+// 	//阻塞
+// 	while (!is_exit)
+// 	{
+// 		audio_mutex.lock();
+// 		if (packs.size() < max_list)
+// 		{
+// 			packs.push_back(pkt);
+// 			audio_mutex.unlock();
+// 			break;
+// 		}
+// 		audio_mutex.unlock();
+// 		msleep(1);
+// 	}
+// }
 
 void QfAudioThread::run()
 {
 	unsigned char *pcm = new unsigned char[1024 * 1024 * 10];
 	while (!is_exit)
 	{
-		mutex.lock();
+		audio_mutex.lock();
 
 		//没有数据
-		if (packs.empty() || !decode || !resample || !audio_play)
-		{
-			mutex.unlock();
-			msleep(1);
-			continue;
-		}
-
-		AVPacket *pkt = packs.front();
-		packs.pop_front();
+// 		if (packs.empty() || !decode || !resample || !audio_play)
+// 		{
+// 			audio_mutex.unlock();
+// 			msleep(1);
+// 			continue;
+// 		}
+		AVPacket *pkt = pop();
+// 		AVPacket *pkt = packs.front();
+// 		packs.pop_front();
 		bool re = decode->send(pkt);
 		if (!re)
 		{
-			mutex.unlock();
+			audio_mutex.unlock();
 			msleep(1);
 			continue;
 		}
@@ -86,6 +97,8 @@ void QfAudioThread::run()
 		{
 			AVFrame * frame = decode->recv();
 			if (!frame) break;
+			//减去缓冲未播放的时间
+			pts = decode->get_pts() - audio_play->get_remainder_ms();
 			//重采样 
 			int size = resample->resample(frame, pcm);
 			//播放音频
@@ -102,7 +115,12 @@ void QfAudioThread::run()
 				break;
 			}
 		}
-		mutex.unlock();
+		audio_mutex.unlock();
 	}
 	delete pcm;
+}
+
+long long QfAudioThread::get_pts() const
+{
+	return pts;
 }

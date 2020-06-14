@@ -91,6 +91,7 @@
     <ClCompile Include="audio\QfAudioThread.cpp" />
     <ClCompile Include="audio\QfResample.cpp" />
     <ClCompile Include="decode\QfDecode.cpp" />
+    <ClCompile Include="decode\QfDecodeThread.cpp" />
     <ClCompile Include="demux\QfDemux.cpp" />
     <ClCompile Include="demux\QfDemuxThread.cpp" />
     <ClCompile Include="main.cpp" />
@@ -112,6 +113,7 @@
     <ClInclude Include="audio\QfAudioThread.h" />
     <ClInclude Include="audio\QfResample.h" />
     <ClInclude Include="decode\QfDecode.h" />
+    <ClInclude Include="decode\QfDecodeThread.h" />
     <ClInclude Include="demux\QfDemuxThread.h" />
     <ClInclude Include="demux\QfDemux.h" />
     <ClInclude Include="utils\function.h" />

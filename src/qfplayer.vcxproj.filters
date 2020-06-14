@@ -70,6 +70,9 @@
     <ClCompile Include="demux\QfDemuxThread.cpp">
       <Filter>demux</Filter>
     </ClCompile>
+    <ClCompile Include="decode\QfDecodeThread.cpp">
+      <Filter>decode</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="qfplayer.h">
@@ -119,6 +122,9 @@
     </ClInclude>
     <ClInclude Include="demux\QfDemuxThread.h">
       <Filter>demux</Filter>
+    </ClInclude>
+    <ClInclude Include="decode\QfDecodeThread.h">
+      <Filter>decode</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

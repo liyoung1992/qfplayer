@@ -11,6 +11,7 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QPushButton>
 #include <QtWidgets/QWidget>
 #include "video/QFVideoWidget.h"
 
@@ -20,15 +21,19 @@ class Ui_qfplayerClass
 {
 public:
     QFVideoWidget *video;
+    QPushButton *openFile;
 
     void setupUi(QWidget *qfplayerClass)
     {
         if (qfplayerClass->objectName().isEmpty())
             qfplayerClass->setObjectName(QString::fromUtf8("qfplayerClass"));
-        qfplayerClass->resize(965, 621);
+        qfplayerClass->resize(936, 647);
         video = new QFVideoWidget(qfplayerClass);
         video->setObjectName(QString::fromUtf8("video"));
-        video->setGeometry(QRect(10, 20, 921, 561));
+        video->setGeometry(QRect(-1, -1, 941, 651));
+        openFile = new QPushButton(qfplayerClass);
+        openFile->setObjectName(QString::fromUtf8("openFile"));
+        openFile->setGeometry(QRect(10, 610, 75, 23));
 
         retranslateUi(qfplayerClass);
 
@@ -38,6 +43,7 @@ public:
     void retranslateUi(QWidget *qfplayerClass)
     {
         qfplayerClass->setWindowTitle(QApplication::translate("qfplayerClass", "qfplayer", nullptr));
+        openFile->setText(QApplication::translate("qfplayerClass", "\346\211\223\345\274\200", nullptr));
     } // retranslateUi
 
 };

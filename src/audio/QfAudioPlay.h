@@ -18,7 +18,8 @@ public:
 	virtual bool write(const unsigned char *data, int datasize) = 0;
 	virtual int getFree() = 0;
 
-
+	//返回缓冲中还没有播放的时间(毫秒)
+	virtual long long get_remainder_ms() = 0;
 	int sampleRate = 44100;
 	int sampleSize = 16;
 	int channels = 2;
