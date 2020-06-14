@@ -96,7 +96,7 @@ public:
 	///Ω‚¬Î≤‚ ‘
 // 	QFDecode vdecode;
 // 	QFDecode adecode;
-	QFVideoWidget *video = NULL;
+	QfVideoWidget *video = NULL;
 	//QfResample resample;
 	//QLabel* label;
 };

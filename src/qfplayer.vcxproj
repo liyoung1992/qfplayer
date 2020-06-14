@@ -39,7 +39,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>$(SolutionDir)build\debug\</OutDir>
+    <OutDir>..\build\debug\</OutDir>
+    <IntDir>..\build\temp\</IntDir>
   </PropertyGroup>
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt_defaults.props')">
     <Import Project="$(QtMsBuild)\qt_defaults.props" />
@@ -97,7 +98,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="qfplayer.cpp" />
     <ClCompile Include="video\QfVideoThread.cpp" />
-    <ClCompile Include="video\QFVideoWidget.cpp" />
+    <ClCompile Include="video\QfVideoWidget.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="qfplayer.h" />
@@ -120,7 +121,7 @@
     <ClInclude Include="utils\pch.h" />
     <ClInclude Include="video\QfVideoCallback.h" />
     <ClInclude Include="video\QfVideoThread.h" />
-    <QtMoc Include="video\QFVideoWidget.h" />
+    <QtMoc Include="video\QfVideoWidget.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

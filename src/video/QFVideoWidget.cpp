@@ -1,4 +1,4 @@
-#include "QFVideoWidget.h"
+#include "QfVideoWidget.h"
 #include <QDebug>
 //自动加双引号
 #define GET_STR(x) #x
@@ -45,16 +45,16 @@ void main(void)
 
 //准备yuv数据
 // ffmpeg -i v1080.mp4 -t 10 -s 240x128 -pix_fmt yuv420p  out240x128.yuv
-QFVideoWidget::QFVideoWidget(QWidget *parent)
+QfVideoWidget::QfVideoWidget(QWidget *parent)
 	: QOpenGLWidget(parent)
 {
 }
 
-QFVideoWidget::~QFVideoWidget()
+QfVideoWidget::~QfVideoWidget()
 {
 }
 
-void QFVideoWidget::repaint(AVFrame *frame)
+void QfVideoWidget::repaint(AVFrame *frame)
 {
 	if (!frame)return;
 	mux.lock();
@@ -87,7 +87,7 @@ void QFVideoWidget::repaint(AVFrame *frame)
 	//刷新显示
 	update();
 }
-void QFVideoWidget::init(const int& width, const int& height)
+void QfVideoWidget::init(const int& width, const int& height)
 {
 	mux.lock();
 	this->width = width;
@@ -145,7 +145,7 @@ void QFVideoWidget::init(const int& width, const int& height)
 
 }
 //初始化opengl
-void QFVideoWidget::initializeGL()
+void QfVideoWidget::initializeGL()
 {
 	qDebug() << "initializeGL";
 	mux.lock();
@@ -216,7 +216,7 @@ void QFVideoWidget::initializeGL()
 }
 
 //刷新显示
-void QFVideoWidget::paintGL()
+void QfVideoWidget::paintGL()
 {
 	//if (feof(fp))
 	//{
@@ -256,7 +256,7 @@ void QFVideoWidget::paintGL()
 
 
 // 窗口尺寸变化
-void QFVideoWidget::resizeGL(int width, int height)
+void QfVideoWidget::resizeGL(int width, int height)
 {
 	mux.lock();
 	qDebug() << "resizeGL " << width << ":" << height;

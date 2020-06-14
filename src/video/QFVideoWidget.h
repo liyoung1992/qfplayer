@@ -1,5 +1,5 @@
-#ifndef QFVIDEOWIDGET_H
-#define QFVIDEOWIDGET_H
+#ifndef QfVideoWidget_H
+#define QfVideoWidget_H
 
 
 #include <QOpenGLWidget>
@@ -8,7 +8,7 @@
 #include <mutex>
 #include "../utils/pch.h"
 #include "QfVideoCallback.h"
-class QFVideoWidget : public QOpenGLWidget,
+class QfVideoWidget : public QOpenGLWidget,
 	protected QOpenGLFunctions,public QFVideoCallback
 {
 	Q_OBJECT
@@ -18,8 +18,8 @@ public:
 	//不管成功与否都释放frame空间
 	virtual void repaint(AVFrame *frame);
 
-	QFVideoWidget(QWidget *parent);
-	~QFVideoWidget();
+	QfVideoWidget(QWidget *parent);
+	~QfVideoWidget();
 protected:
 	//刷新显示
 	void paintGL();
@@ -49,6 +49,6 @@ private:
 };
 
 
-#endif //QFVIDEOWIDGET_H
+#endif //QfVideoWidget_H
 
 

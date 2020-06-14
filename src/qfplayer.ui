@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>qfplayer</string>
   </property>
-  <widget class="QFVideoWidget" name="video">
+  <widget class="QfVideoWidget" name="video">
    <property name="geometry">
     <rect>
      <x>-1</x>
@@ -40,9 +40,9 @@
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>QFVideoWidget</class>
+   <class>QfVideoWidget</class>
    <extends>QOpenGLWidget</extends>
-   <header>video/QFVideoWidget.h</header>
+   <header>video/QfVideoWidget.h</header>
   </customwidget>
  </customwidgets>
  <resources>

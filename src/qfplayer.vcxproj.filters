@@ -55,9 +55,6 @@
     <ClCompile Include="audio\QfResample.cpp">
       <Filter>audio</Filter>
     </ClCompile>
-    <ClCompile Include="video\QFVideoWidget.cpp">
-      <Filter>video</Filter>
-    </ClCompile>
     <ClCompile Include="audio\QfAudioPlay.cpp">
       <Filter>audio</Filter>
     </ClCompile>
@@ -73,12 +70,15 @@
     <ClCompile Include="decode\QfDecodeThread.cpp">
       <Filter>decode</Filter>
     </ClCompile>
+    <ClCompile Include="video\QfVideoWidget.cpp">
+      <Filter>video</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="qfplayer.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="video\QFVideoWidget.h">
+    <QtMoc Include="video\QfVideoWidget.h">
       <Filter>video</Filter>
     </QtMoc>
   </ItemGroup>
