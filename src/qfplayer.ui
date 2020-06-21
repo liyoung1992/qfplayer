@@ -6,36 +6,315 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>936</width>
+    <width>1072</width>
     <height>647</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>qfplayer</string>
   </property>
-  <widget class="QfVideoWidget" name="video">
-   <property name="geometry">
-    <rect>
-     <x>-1</x>
-     <y>-1</y>
-     <width>941</width>
-     <height>651</height>
-    </rect>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(17, 17, 17);</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="spacing">
+    <number>2</number>
    </property>
-  </widget>
-  <widget class="QPushButton" name="openFile">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>610</y>
-     <width>75</width>
-     <height>23</height>
-    </rect>
+   <property name="leftMargin">
+    <number>0</number>
    </property>
-   <property name="text">
-    <string>打开</string>
+   <property name="topMargin">
+    <number>0</number>
    </property>
-  </widget>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="QfVideoWidget" name="video"/>
+   </item>
+   <item>
+    <layout class="QVBoxLayout" name="bottomLay">
+     <property name="spacing">
+      <number>2</number>
+     </property>
+     <item>
+      <widget class="QfSlider" name="playPos">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>5</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>10</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">
+QSlider::groove:horizontal{ 
+		height: 3px; 
+		left: 0px; 
+		right: 0px; 
+		border:0px;    
+	    border-radius:3px;    
+		background:rgba(0,0,0,50);
+ } 
+
+ QSlider::handle:horizontal{ 
+		width:  20px; 
+		height: 20px; 
+		margin-top: -8px; 
+		margin-left: 0px; 
+		margin-bottom: -8px; 
+		margin-right: 0px; 
+ 		border-image:url(:/qfplayer/resource/images/slider.svg);
+} 
+
+QSlider::sub-page:horizontal{
+	   background:rgba(80,166,234,1);
+}
+
+
+QSlider::handle:horizontal:hover {
+	    width:  30px; 
+		height: 30px; 
+		margin-top: -10px; 
+		margin-left: 0px; 
+		margin-bottom: -10px; 
+		margin-right: 0px; 
+ 		border-image:url(:/qfplayer/resource/images/slider.svg);
+}
+QSlider::sub-page:horizontal:disabled {
+		background: #BB345F;
+}
+QSlider::add-page:horizontal:disabled {
+	    background: #1ADEFF;
+}
+QSlider::handle:horizontal:disabled {
+	    background: #EEDDFF;
+}
+</string>
+       </property>
+       <property name="maximum">
+        <number>999</number>
+       </property>
+       <property name="pageStep">
+        <number>1</number>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <property name="spacing">
+        <number>8</number>
+       </property>
+       <item>
+        <widget class="QLabel" name="timeLab">
+         <property name="styleSheet">
+          <string notr="true">color: rgb(255, 255, 255);</string>
+         </property>
+         <property name="text">
+          <string>00:03:51/00.05.11</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QPushButton" name="openFile">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="qfplayer.qrc">
+           <normaloff>:/qfplayer/resource/images/open.svg</normaloff>:/qfplayer/resource/images/open.svg</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>32</width>
+           <height>32</height>
+          </size>
+         </property>
+         <property name="default">
+          <bool>true</bool>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="resetBtn">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="qfplayer.qrc">
+           <normaloff>:/qfplayer/resource/images/stop.svg</normaloff>:/qfplayer/resource/images/stop.svg</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>32</width>
+           <height>32</height>
+          </size>
+         </property>
+         <property name="default">
+          <bool>true</bool>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="backBtn">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="qfplayer.qrc">
+           <normaloff>:/qfplayer/resource/images/back.svg</normaloff>:/qfplayer/resource/images/back.svg</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>32</width>
+           <height>32</height>
+          </size>
+         </property>
+         <property name="default">
+          <bool>true</bool>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="playBtn">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="qfplayer.qrc">
+           <normaloff>:/qfplayer/resource/images/video_stop.svg</normaloff>:/qfplayer/resource/images/video_stop.svg</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>40</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="default">
+          <bool>false</bool>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="nextBtn">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="qfplayer.qrc">
+           <normaloff>:/qfplayer/resource/images/next.svg</normaloff>:/qfplayer/resource/images/next.svg</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>32</width>
+           <height>32</height>
+          </size>
+         </property>
+         <property name="default">
+          <bool>true</bool>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="volBtn">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="qfplayer.qrc">
+           <normaloff>:/qfplayer/resource/images/volume.svg</normaloff>:/qfplayer/resource/images/volume.svg</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>32</width>
+           <height>32</height>
+          </size>
+         </property>
+         <property name="default">
+          <bool>true</bool>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QPushButton" name="fullScreen">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="qfplayer.qrc">
+           <normaloff>:/qfplayer/resource/images/full_sceen.svg</normaloff>:/qfplayer/resource/images/full_sceen.svg</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>32</width>
+           <height>32</height>
+          </size>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+  </layout>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
@@ -43,6 +322,11 @@
    <class>QfVideoWidget</class>
    <extends>QOpenGLWidget</extends>
    <header>video/QfVideoWidget.h</header>
+  </customwidget>
+  <customwidget>
+   <class>QfSlider</class>
+   <extends>QSlider</extends>
+   <header>ui/QfSlider.h</header>
   </customwidget>
  </customwidgets>
  <resources>

@@ -16,7 +16,7 @@ public:
 	//空间需要调用者释放 ，释放AVPacket对象空间，
 	//和数据空间 av_packet_free
 	virtual AVPacket*  read();
-
+	virtual AVPacket* read_video();
 
 	//seek (0-1)
 	virtual bool seek(double pos);
@@ -38,6 +38,7 @@ public:
 	int height() const;
 	int sample_rate() const;
 	int channels() const;
+	long long get_total_ms() const;
 private:
 	//音视频索引，读取时区分
 	int m_pVideoStream;
@@ -47,7 +48,7 @@ private:
 	int m_pSampleRate = 0;
 	int m_pChannels = 0;
 	// 媒体总时长
-	int m_pTotalMs;
+	long long m_pTotalMs;
 	std::mutex m_pMutex;
 	AVFormatContext* m_pAvFromatContext;
 };

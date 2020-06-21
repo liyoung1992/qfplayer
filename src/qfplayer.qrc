@@ -1,4 +1,15 @@
 <RCC>
-    <qresource prefix="qfplayer">
+    <qresource prefix="/qfplayer">
+        <file>resource/images/back.svg</file>
+        <file>resource/images/next.svg</file>
+        <file>resource/images/record.svg</file>
+        <file>resource/images/stop.svg</file>
+        <file>resource/images/video_stop.svg</file>
+        <file>resource/images/slider.svg</file>
+        <file>resource/images/camera.svg</file>
+        <file>resource/images/volume.svg</file>
+        <file>resource/images/open.svg</file>
+        <file>resource/images/video_play.svg</file>
+        <file>resource/images/full_sceen.svg</file>
     </qresource>
 </RCC>

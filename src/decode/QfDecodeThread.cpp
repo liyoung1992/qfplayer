@@ -1,5 +1,5 @@
 #include "QfDecodeThread.h"
-#include "../utils/function.h"
+
 
 void QfDecodeThread::clear()
 {
@@ -14,6 +14,18 @@ void QfDecodeThread::clear()
 	mux.unlock();
 }
 
+
+void QfDecodeThread::close()
+{
+	clear();
+	is_exit = true;
+	wait();
+	decode->close();
+	mux.lock();
+	delete decode;
+	decode = NULL;
+	mux.unlock();
+}
 
 //取出一帧数据，并出栈，如果没有返回NULL
 AVPacket *QfDecodeThread::pop()

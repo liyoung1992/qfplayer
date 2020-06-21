@@ -41,8 +41,8 @@ bool QFDemux::open(const char *url)
 	result = avformat_find_stream_info(m_pAvFromatContext, 0);
 
 	//总时长 毫秒
-	int totalMs = m_pAvFromatContext->duration / (AV_TIME_BASE / 1000);
-	std::cout << "totalMs = " << totalMs << std::endl;
+	m_pTotalMs = m_pAvFromatContext->duration / (AV_TIME_BASE / 1000);
+	std::cout << "totalMs = " << m_pTotalMs << std::endl;
 
 	//打印视频流详细信息
 	av_dump_format(m_pAvFromatContext, 0, url, 0);
@@ -111,6 +111,31 @@ AVPacket* QFDemux::read()
 		(r2d(m_pAvFromatContext->streams[pkt->stream_index]->time_base)));
 	m_pMutex.unlock();
 	std::cout << pkt->pts << " " << std::flush;
+	return pkt;
+}
+
+AVPacket* QFDemux::read_video()
+{
+	m_pMutex.lock();
+	if (!m_pAvFromatContext) //容错
+	{
+		m_pMutex.unlock();
+		return 0;
+	}
+	m_pMutex.unlock();
+
+	AVPacket *pkt = NULL;
+	//防止阻塞
+	for (int i = 0; i < 20; i++)
+	{
+		pkt = read();
+		if (!pkt)break;
+		if (pkt->stream_index == m_pVideoStream)
+		{
+			break;
+		}
+		av_packet_free(&pkt);
+	}
 	return pkt;
 }
 
@@ -217,4 +242,9 @@ int QFDemux::sample_rate() const
 int QFDemux::channels() const
 {
 	return m_pChannels;
+}
+
+long long QFDemux::get_total_ms() const
+{
+	return m_pTotalMs;
 }

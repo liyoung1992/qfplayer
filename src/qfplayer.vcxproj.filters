@@ -38,6 +38,9 @@
     <Filter Include="video">
       <UniqueIdentifier>{f5197c68-d5f8-4053-9def-412cfea65361}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ui">
+      <UniqueIdentifier>{0e410038-528a-4fef-b0a4-4dad0204f65e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -73,6 +76,12 @@
     <ClCompile Include="video\QfVideoWidget.cpp">
       <Filter>video</Filter>
     </ClCompile>
+    <ClCompile Include="ui\QfMediaController.cpp">
+      <Filter>ui</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\QfSlider.cpp">
+      <Filter>ui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="qfplayer.h">
@@ -81,10 +90,19 @@
     <QtMoc Include="video\QfVideoWidget.h">
       <Filter>video</Filter>
     </QtMoc>
+    <QtMoc Include="ui\QfMediaController.h">
+      <Filter>ui</Filter>
+    </QtMoc>
+    <QtMoc Include="ui\QfSlider.h">
+      <Filter>ui</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="qfplayer.ui">
       <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="ui\QfMediaController.ui">
+      <Filter>ui</Filter>
     </QtUic>
   </ItemGroup>
   <ItemGroup>

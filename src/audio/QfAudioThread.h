@@ -17,9 +17,15 @@ public:
 
 	//virtual void push(AVPacket* pkt);
 
+	//停止线程，清理
+	virtual void close();
 	void run();
+	virtual void clear();
 
 	long long get_pts() const;
+
+	void set_pause(const bool& pause);
+	bool get_pause() const;
 private:
 	//std::list<AVPacket*> packs;
 	std::mutex audio_mutex;
@@ -29,6 +35,7 @@ private:
 	bool is_exit = false;
 	//int max_list = 100;
 	long long pts;
+	bool is_pause = false;
 };
 
 #endif // QFAUDIOTHREAD_H

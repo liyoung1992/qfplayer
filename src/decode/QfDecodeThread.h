@@ -1,5 +1,8 @@
-#pragma once
+#ifndef QFDECODETHREAD_H
+#define  QFDECODETHREAD_H
+
 #include <qthread.h>
+#include "../utils/function.h"
 #include "../utils/pch.h"
 #include "QfDecode.h"
 class QfDecodeThread :
@@ -12,6 +15,8 @@ public:
 
 	//清理队列
 	virtual void clear();
+	//清理资源，停止线程
+	virtual void close();
 
 	//取出一帧数据，并出栈，如果没有返回NULL
 	virtual AVPacket *pop();
@@ -25,3 +30,4 @@ protected:
 	bool is_exit = false;
 };
 
+#endif //QFDECODETHREAD_H

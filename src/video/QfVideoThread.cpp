@@ -1,6 +1,7 @@
 #include "QfVideoThread.h"
 // #include "QfVideoThread.h"
 // #include "QFDecode.h"
+
 #include <iostream>
 using namespace std;
 //打开，不管成功与否都清理
@@ -54,11 +55,18 @@ void QfVideoThread::run()
 	while (!is_exit)
 	{
 		video_mux.lock();
+		if (this->is_pause)
+		{
+			video_mux.unlock();
+			msleep(5);
+			continue;
+		}
 		if (synpts < decode->get_pts()) {
 			video_mux.unlock();
 			msleep(1);
 			continue;
 		}
+		
 // 		//没有数据
 // 		if (packs.empty() || !decode)
 // 		{
@@ -92,6 +100,34 @@ void QfVideoThread::run()
 	}
 }
 
+bool QfVideoThread::repaint_to_pts(AVPacket *pkt, long long seekpts)
+{
+	video_mux.lock();
+	bool re = decode->send(pkt);
+	if (!re)
+	{
+		video_mux.unlock();
+		return true; //表示结束解码
+	}
+	AVFrame *frame = decode->recv();
+	if (!frame)
+	{
+		video_mux.unlock();
+		return false;
+	}
+	//到达位置
+	if (decode->get_pts() >= seekpts)
+	{
+		if (call)
+			call->repaint(frame);
+		video_mux.unlock();
+		return true;
+	}
+	freeFrame(&frame);
+	video_mux.unlock();
+	return false;
+}
+
 // QfVideoThread::QfVideoThread()
 // {
 // }
@@ -112,4 +148,16 @@ long long QfVideoThread::get_synpts() const
 void QfVideoThread::set_synpts(const long long& pts)
 {
 	synpts = pts;
+}
+
+void QfVideoThread::set_pause(const bool& pause)
+{
+	video_mux.lock();
+	is_pause = pause;
+	video_mux.unlock();
+}
+
+bool QfVideoThread::get_pause() const
+{
+	return is_pause;
 }

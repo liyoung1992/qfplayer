@@ -10,6 +10,7 @@ public:
 	QAudioOutput *output = NULL;
 	QIODevice *io = NULL;
 	std::mutex mux;
+	bool is_pause = false;
 	virtual long long get_remainder_ms() {
 		mux.lock();
 		if (!output) {
@@ -82,6 +83,14 @@ public:
 			return false;
 		return true;
 	}
+	virtual void clear() {
+		mux.lock();
+		if (io)
+		{
+			io->reset();
+		}
+		mux.unlock();
+	}
 
 	virtual int getFree()
 	{
@@ -94,6 +103,24 @@ public:
 		int free = output->bytesFree();
 		mux.unlock();
 		return free;
+	}
+	virtual void set_pause(const bool& pause) {
+		is_pause = pause;
+		mux.lock();
+		if (!output)
+		{
+			mux.unlock();
+			return;
+		}
+		if (pause)
+		{
+			output->suspend();
+		}
+		else
+		{
+			output->resume();
+		}
+		mux.unlock();
 	}
 };
 QfAudioPlay *QfAudioPlay::instance()

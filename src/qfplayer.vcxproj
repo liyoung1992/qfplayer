@@ -63,7 +63,7 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
-      <AdditionalIncludeDirectories>..\include\ffmpeg;.\audio;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\include\ffmpeg;.\audio;.\ui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -79,7 +79,7 @@
       <DebugInformationFormat />
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
-      <AdditionalIncludeDirectories>.\audio;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\audio;.\ui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -97,6 +97,8 @@
     <ClCompile Include="demux\QfDemuxThread.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="qfplayer.cpp" />
+    <ClCompile Include="ui\QfMediaController.cpp" />
+    <ClCompile Include="ui\QfSlider.cpp" />
     <ClCompile Include="video\QfVideoThread.cpp" />
     <ClCompile Include="video\QfVideoWidget.cpp" />
   </ItemGroup>
@@ -105,6 +107,7 @@
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="qfplayer.ui" />
+    <QtUic Include="ui\QfMediaController.ui" />
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="qfplayer.qrc" />
@@ -117,6 +120,8 @@
     <ClInclude Include="decode\QfDecodeThread.h" />
     <ClInclude Include="demux\QfDemuxThread.h" />
     <ClInclude Include="demux\QfDemux.h" />
+    <QtMoc Include="ui\QfMediaController.h" />
+    <QtMoc Include="ui\QfSlider.h" />
     <ClInclude Include="utils\function.h" />
     <ClInclude Include="utils\pch.h" />
     <ClInclude Include="video\QfVideoCallback.h" />

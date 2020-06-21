@@ -13,4 +13,10 @@ static void freePacket(AVPacket **pkt)
 		return;
 	av_packet_free(pkt);
 }
+
+static void freeFrame(AVFrame **frame)
+{
+	if (!frame || !(*frame))return;
+	av_frame_free(frame);
+}
 #endif //FUNCTION_H
