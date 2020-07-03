@@ -16,4 +16,6 @@
 - 推流
 
 ### 效果图（ps：界面随便画的）
-[效果图](https://github.com/liyoung1992/qfplayer/blob/master/play.jpg?raw=true)
+
+![效果图](https://github.com/liyoung1992/qfplayer/blob/master/play.jpg?raw=true)
+
